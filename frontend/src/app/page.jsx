@@ -5,7 +5,7 @@ import Dashboard from './Components/Dashboard'
 
 export default function page() {
   return (
-    <div className='flex border bg-blue-50'>
+    <div className='flex min-h-screen bg-blue-50'>
       <Sidebar />
       <Dashboard />
     </div>
