@@ -1,4 +1,5 @@
 'use client'
+import React, { useState } from "react"
 import {
   CloudSun,
   Home,
@@ -6,7 +7,7 @@ import {
   MapPin,
   Star
 } from "lucide-react"
-import React, { useState } from "react"
+
 
 
 
@@ -14,6 +15,7 @@ export default function Sidebar() {
   const menus = [
     {
       title: "Home",
+      // ایکون رو ذخیره کردم
       icon: Home
     },
     {
@@ -34,14 +36,10 @@ export default function Sidebar() {
 
 
   return (
-    <aside className="w-[250px] min-h-screen bg-white rounded-3xl p-5 ">
-      <div className="flex items-center gap-3">
+    <aside className="w-[250px] min-h-screen bg-white rounded-3xl p-5 m-5  ">
+      <div className="flex items-center gap-3 ">
         <div className="w-10 h-10 rounded-2xl bg-[#052168] flex items-center justify-center">
-          <CloudSun
-            size={24}
-            strokeWidth={2}
-            className="text-white"
-          />
+          <CloudSun size={24} strokeWidth={2} className="text-white" />
         </div>
 
         <div>
@@ -55,29 +53,16 @@ export default function Sidebar() {
       </div>
 
 
-      <nav className="mt-10 flex flex-col gap-5">
+      <nav className="mt-10 flex flex-col gap-5 ">
         {menus.map((val) => {
           const Icon = val.icon
           return (
-
             <div
               key={val.title}
               onClick={() => setActive(val.title)}
-              className={`
-    flex items-center
-    gap-4
-    h-12
-    px-4
-    rounded-xl
-    cursor-pointer
-    transition-all
-    duration-300
-
-    ${active === val.title
-                  ? "bg-[#002176] text-white shadow-md"
-                  : "text-slate-500 hover:bg-[#4f7ffa20] hover:text-[#002176]"
-                }
-  `}
+              className={` flex items-center gap-4  h-12  px-4  rounded-xl  cursor-pointer  transition-all  duration-300 
+                ${active === val.title ? "bg-[#002176] text-white shadow-md" : "text-slate-500 hover:bg-[#4f7ffa20] hover:text-[#002176]"}
+               `}
             >
               <Icon size={18} strokeWidth={2} />
               <span className="font-medium">{val.title}</span>
