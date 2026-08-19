@@ -130,3 +130,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+# Weather config
+
+WEATHER_API_KEY = env("WEATHER_API_KEY")
+
+WEATHER_API_BASE_URL = "https://api.weatherapi.com/v1"
+
+#####################################################
