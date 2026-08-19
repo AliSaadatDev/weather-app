@@ -2,6 +2,21 @@ import requests
 
 from django.conf import settings
 
+class WeatherAPIError(Exception):
+    """Base exception for WeatherAPI errors."""
+
+
+class WeatherAPINotFoundError(WeatherAPIError):
+    """Raised when the requested location does not exist."""
+
+
+class WeatherAPIAuthenticationError(WeatherAPIError):
+    """Raised when WeatherAPI authentication fails."""
+
+
+class WeatherAPITimeoutError(WeatherAPIError):
+    """Raised when WeatherAPI request times out."""
+
 
 class WeatherAPIClient:
 
