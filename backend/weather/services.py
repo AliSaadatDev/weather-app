@@ -25,6 +25,7 @@ class WeatherAPIClient:
         self.api_key = settings.WEATHER_API_KEY
 
     def get_current_weather(self, location: str):
+
         url = f"{self.base_url}/current.json"
 
         params = {
@@ -33,11 +34,37 @@ class WeatherAPIClient:
             "aqi": "yes",
         }
 
-        response = requests.get(
-            url,
-            params=params,
-            timeout=10,
-        )
+        try:
+            response = requests.get(
+                url,
+                params=params,
+                timeout=10,
+            )
+
+        except requests.Timeout as exc:
+            raise WeatherAPITimeoutError(
+                "Weather service timed out."
+            ) from exc
+
+        except requests.RequestException as exc:
+            raise WeatherAPIError(
+                "Weather service is unavailable."
+            ) from exc
+
+        if response.status_code == 400:
+            raise WeatherAPINotFoundError(
+                "Location not found."
+            )
+
+        if response.status_code in (401, 403):
+            raise WeatherAPIAuthenticationError(
+                "Weather service authentication failed."
+            )
+
+        if response.status_code >= 500:
+            raise WeatherAPIError(
+                "Weather service is temporarily unavailable."
+            )
 
         response.raise_for_status()
 
